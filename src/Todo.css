@@ -1,21 +1,3 @@
-body{
-  background-color:#ffe6e6;
-  font-family: "Marker Felt", fantasy;
-  color:#993300;
-  text-align: center;
-  font-size:30px;
-}
-
-h1{
-  font-size:70px;
-  text-decoration: underline;
-  text-transform: uppercase;
-}
-input{
-  width:200px;
-  height:25px;
-  border-radius:1em;
-}
 button{
   font-family: "Marker Felt", fantasy;
   color:#cc0052;
@@ -62,8 +44,4 @@ p{
   justify-self:flex-end;
   align-self:center;
   height: 35px;
-}
-
-#add{
-  margin-left:10px;
 }

@@ -1,0 +1,16 @@
+input{
+  width:200px;
+  height:25px;
+  border-radius:1em;
+}
+button{
+  font-family: "Marker Felt", fantasy;
+  color:#cc0052;
+  border-radius:20%;
+  font-size:15px;
+  padding:10px;
+  background-color: white;
+}
+#add{
+  margin-left:10px;
+}
