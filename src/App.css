@@ -32,7 +32,7 @@ p{
 #todo-list{
   display:flex;
   flex-direction:column;
-  width:400px;
+  width:500px;
   justify-content: center;
   align-items: center;
   margin-left: auto;

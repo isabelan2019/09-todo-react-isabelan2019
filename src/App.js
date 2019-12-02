@@ -50,23 +50,19 @@ class App extends Component {
     xhttp2.setRequestHeader("x-api-key", "62a83b-dd0595-259c51-78553e-b3f8de");
     xhttp2.send(JSON.stringify(data));
   }
-  
+
   render() {
     return (
       <div className="App">
-        <h1>Isabel's ToDo App</h1>
+        <h1>Isabel's To Do App</h1>
         <div id="todo-list">
-          <NewTodo add={this.add}
-          />
+          <NewTodo add={this.add}/>
           {this.state.todos.map((todo)=>
           <Todo key={todo.id}
                 id={todo.id}
                 text={todo.text}
                 completed={todo.completed}
-                created={todo.created} />
-          )
-              }
-
+                created={todo.created} />)}
         </div>
       </div>
 

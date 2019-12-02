@@ -21,7 +21,6 @@ p{
   margin-right: auto;
 }
 .completed{
-  text-decoration: line-through;
   color:grey;
 }
 .toDoTask{

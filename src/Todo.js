@@ -4,8 +4,12 @@ import './Todo.css';
 class Todo extends Component {
   constructor(props){
     super(props)
+    this.state={
+      completed:this.props.completed
+    }
     this.delete=this.delete.bind(this);
     this.check=this.check.bind(this);
+
   }
   check(event){
     const self = this;
@@ -17,7 +21,7 @@ class Todo extends Component {
       if (this.readyState === 4 && this.status === 200) {
         var todo = JSON.parse(this.responseText);
         console.log(todo);
-
+        self.setState({completed:true});
       } else if (this.readyState === 4){
         console.log(this.responseText);
       }
@@ -29,20 +33,19 @@ class Todo extends Component {
   }
   delete(event){
     const self = this;
+    event.preventDefault();
+    event.persist();
     var xhttp4 = new XMLHttpRequest();
     // Response handler
     xhttp4.onreadystatechange = function() {
         // Wait for readyState = 4 & 200 response
         if (this.readyState === 4 && this.status === 200) {
             // parse JSON response
+
+            // remove actual items
+            event.target.parentNode.remove();
             var todo = JSON.parse(this.responseText);
             console.log(todo);
-            var newList = [...self.state.todos];
-            var index = newList.indexTarget(todo);
-            if (index!==-1){
-              newList.splice(index,1);
-              self.setState({todos:newList});
-            }
         } else if (this.readyState === 4) {
             // this.status !== 200, error from server
             console.log(this.responseText);
@@ -54,11 +57,15 @@ class Todo extends Component {
     xhttp4.send();
   }
   render() {
+    var className="toDoTask";
+    if (this.state.completed){
+      className="toDoTask completed";
+    }
     return (
       //how to add toDoTask class name
-      <span className="toDoTask" id={this.props.id}>
+      <span className={className} id={this.props.id}>
         <button onClick={this.check} className="checkbox"> &#10004; </button>
-        <p className={this.props.completed ? "completed" : "not-completed"}> {this.props.text} </p>
+        <p> {this.props.text} </p>
         <button onClick={this.delete} className="deleteBtn"> X </button>
       </span>
     );
