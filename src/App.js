@@ -6,7 +6,7 @@ import NewTodo from './NewTodo';
 class App extends Component {
   constructor(){
     super()
-    this.state={todos:[]}
+    this.state={todos:[], input:''}
     this.add=this.add.bind(this);
   }
 
@@ -39,6 +39,7 @@ class App extends Component {
             // parse JSON response
             var todo = JSON.parse(this.responseText);
             self.setState({todos:[...self.state.todos,todo]});
+            self.setState({input: ""});
             console.log(todo);
         } else if (this.readyState === 4) {
             // this.status !== 200, error from server
@@ -51,6 +52,14 @@ class App extends Component {
     xhttp2.send(JSON.stringify(data));
   }
 
+  sortList(){
+      const self = this;
+      var oldArray = self.state.todos;
+      var newArray = oldArray.sort(function (a, b) {
+      return a.text.localeCompare(b.text);
+      })
+      self.setState({todos:newArray});
+  }
   render() {
     return (
       <div className="App">

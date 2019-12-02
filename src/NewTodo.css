@@ -11,6 +11,6 @@ button{
   padding:10px;
   background-color: white;
 }
-#add{
+#add, #sort{
   margin-left:10px;
 }

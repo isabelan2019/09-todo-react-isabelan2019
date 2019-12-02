@@ -32,7 +32,7 @@ class Todo extends Component {
       xhttp5.send(JSON.stringify(data));
   }
   delete(event){
-    const self = this;
+  //  const self = this;
     event.preventDefault();
     event.persist();
     var xhttp4 = new XMLHttpRequest();
@@ -41,7 +41,6 @@ class Todo extends Component {
         // Wait for readyState = 4 & 200 response
         if (this.readyState === 4 && this.status === 200) {
             // parse JSON response
-
             // remove actual items
             event.target.parentNode.remove();
             var todo = JSON.parse(this.responseText);
