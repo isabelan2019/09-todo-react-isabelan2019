@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/09-todo-react-isabelan2019/precache-manifest.fc53de9f17d24e69d6db40bf92226730.js"
+  "/09-todo-react-isabelan2019/precache-manifest.f4812b7e7c453a504fdae1e406e8f5b4.js"
 );
 
 workbox.clientsClaim();
