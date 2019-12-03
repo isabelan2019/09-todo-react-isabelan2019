@@ -4,13 +4,13 @@ body{
   color:#993300;
   text-align: center;
   font-size:30px;
-
 }
 
 h1{
   font-size:70px;
   text-decoration: underline;
   text-transform: uppercase;
+  text-align: center;
 }
 input{
   width:200px;
@@ -33,7 +33,7 @@ p{
 #todo-list{
   display:flex;
   flex-direction:column;
-  width:500px;
+  width:400px;
   justify-content: center;
   align-items: center;
   margin-left: auto;

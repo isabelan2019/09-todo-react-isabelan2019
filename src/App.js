@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import Todo from './Todo';
 import NewTodo from './NewTodo';
-//import Sort from './sort';
 
 class App extends Component {
   constructor(props){
@@ -10,6 +9,7 @@ class App extends Component {
     this.state={todos:[], input:''}
     this.add=this.add.bind(this);
     this.sortList=this.sortList.bind(this);
+    this.delete=this.delete.bind(this);
   }
 
   componentDidMount(){
@@ -20,7 +20,6 @@ class App extends Component {
             var todos = JSON.parse(this.responseText);
             console.log(todos);
             self.setState({todos:todos});
-            self.setState({input: ""});
           }
     };
     xhttp.open("GET", "https://cse204.work/todos", true);
@@ -42,9 +41,9 @@ class App extends Component {
         if (this.readyState === 4 && this.status === 200) {
             // parse JSON response
             var todo = JSON.parse(this.responseText);
-            self.setState({todos:[...self.state.todos,todo]});
+            self.setState({todos:[...self.state.todos,todo], input:''});
             console.log(todo);
-            self.setState({input: ""});
+
         } else if (this.readyState === 4) {
             // this.status !== 200, error from server
             console.log(this.responseText);
@@ -65,6 +64,41 @@ class App extends Component {
       self.setState({todos:newArray});
   }
 
+  delete(event){
+  //  const self = this;
+    const self=this;
+    var itemId=event.target.parentNode.id;
+    // event.persist();
+    var xhttp4 = new XMLHttpRequest();
+    // Response handler
+    xhttp4.onreadystatechange = function() {
+        // Wait for readyState = 4 & 200 response
+        if (this.readyState === 4 && this.status === 200) {
+            // parse JSON response
+            // remove actual items
+            var todo = JSON.parse(this.responseText);
+            console.log(todo);
+            // You need the id of the todo you want to delete as a variable.
+            const remainingTodos = self.state.todos.filter((todo) => {
+              // Looping through all todos, if the id of the current todo DOES NOT equal the id of the todo we want to delete, keep it
+              if (todo.id !== itemId) {
+                return todo;
+              }
+
+            });
+            self.setState({todos:remainingTodos});
+            // Update state with filtered list using this.setState();
+        } else if (this.readyState === 4) {
+            // this.status !== 200, error from server
+            console.log(this.responseText);
+        }
+    };
+    xhttp4.open("DELETE", "https://cse204.work/todos/"+itemId, true);
+    xhttp4.setRequestHeader("Content-type", "application/json");
+    xhttp4.setRequestHeader("x-api-key", "62a83b-dd0595-259c51-78553e-b3f8de");
+    xhttp4.send();
+  }
+
   render() {
     return (
       <div className="App">
@@ -77,7 +111,8 @@ class App extends Component {
                 id={todo.id}
                 text={todo.text}
                 completed={todo.completed}
-                created={todo.created} />)}
+                created={todo.created}
+                delete={this.delete} />)}
         </div>
       </div>
 
