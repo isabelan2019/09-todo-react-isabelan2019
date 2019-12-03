@@ -10,6 +10,14 @@ class App extends Component {
     this.add=this.add.bind(this);
     this.sortList=this.sortList.bind(this);
     this.delete=this.delete.bind(this);
+    this.onChange=this.onChange.bind(this);
+  }
+
+  onChange(event) {
+  // Set the state to the value of the input
+  this.setState({
+    input: event.target.value
+  });
   }
 
   componentDidMount(){
@@ -104,7 +112,7 @@ class App extends Component {
       <div className="App">
         <h1>Isabel's To Do App</h1>
         <div id="todo-list">
-          <NewTodo add={this.add} sort={this.sortList}/>
+          <NewTodo add={this.add} sort={this.sortList} onChange={this.onChange} input={this.state.input}/>
           <button id="sort" type="button" name="sort" onClick={this.sortList}> Sort List By Alphabetical Order </button>
           {this.state.todos.map((todo)=>
           <Todo key={todo.id}
