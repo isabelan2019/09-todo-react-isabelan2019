@@ -4,6 +4,7 @@ body{
   color:#993300;
   text-align: center;
   font-size:30px;
+
 }
 
 h1{
@@ -37,8 +38,4 @@ p{
   align-items: center;
   margin-left: auto;
   margin-right: auto;
-}
-
-#add{
-  margin-left:10px;
 }

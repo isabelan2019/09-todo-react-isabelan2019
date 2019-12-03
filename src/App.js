@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import './App.css';
 import Todo from './Todo';
 import NewTodo from './NewTodo';
+//import Sort from './sort';
 
 class App extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state={todos:[], input:''}
     this.add=this.add.bind(this);
+    this.sortList=this.sortList.bind(this);
   }
 
   componentDidMount(){
@@ -18,6 +20,7 @@ class App extends Component {
             var todos = JSON.parse(this.responseText);
             console.log(todos);
             self.setState({todos:todos});
+            self.setState({input: ""});
           }
     };
     xhttp.open("GET", "https://cse204.work/todos", true);
@@ -25,7 +28,8 @@ class App extends Component {
     xhttp.send();
   }
 
-  add(){
+  add(event){
+    event.preventDefault();
     const self = this;
     var data = {
         text: document.getElementById("new-task").value
@@ -39,8 +43,8 @@ class App extends Component {
             // parse JSON response
             var todo = JSON.parse(this.responseText);
             self.setState({todos:[...self.state.todos,todo]});
-            self.setState({input: ""});
             console.log(todo);
+            self.setState({input: ""});
         } else if (this.readyState === 4) {
             // this.status !== 200, error from server
             console.log(this.responseText);
@@ -57,15 +61,17 @@ class App extends Component {
       var oldArray = self.state.todos;
       var newArray = oldArray.sort(function (a, b) {
       return a.text.localeCompare(b.text);
-      })
+      });
       self.setState({todos:newArray});
   }
+
   render() {
     return (
       <div className="App">
         <h1>Isabel's To Do App</h1>
         <div id="todo-list">
-          <NewTodo add={this.add}/>
+          <NewTodo add={this.add} sort={this.sortList}/>
+          <button id="sort" type="button" name="sort" onClick={this.sortList}> Sort List By Alphabetical Order </button>
           {this.state.todos.map((todo)=>
           <Todo key={todo.id}
                 id={todo.id}

@@ -9,7 +9,6 @@ class Todo extends Component {
     }
     this.delete=this.delete.bind(this);
     this.check=this.check.bind(this);
-
   }
   check(event){
     const self = this;
